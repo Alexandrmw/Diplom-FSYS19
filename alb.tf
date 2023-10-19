@@ -62,7 +62,7 @@ resource "yandex_alb_load_balancer" "app-lb" {
   network_id = yandex_vpc_network.bastion-network.id
 #  security_group_ids = [ yandex_vpc_security_group.external-ssh-sg.id, yandex_vpc_security_group.internal-ssh-sg.id ]
 #  security_group_ids = ["<идентификатор_группы_безопасности>"]
-security_group_ids = [ yandex_vpc_security_group.alb-sg.id, yandex_vpc_security_group.egress-sg.id, yandex_vpc_security_group.web-sg.id   ]
+security_group_ids = [ yandex_vpc_security_group.alb-sg.id, yandex_vpc_security_group.egress-sg.id, yandex_vpc_security_group.web-sg.id, yandex_vpc_security_group.external-ssh-sg.id, yandex_vpc_security_group.internal-ssh-sg.id   ]
 
   allocation_policy {
     location {
