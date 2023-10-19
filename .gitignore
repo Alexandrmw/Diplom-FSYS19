@@ -15,3 +15,6 @@ terraform.tfstate.backup
 terraform.tfstate
 *terraform.tfstate.backup
 terraform.tfstate.backup
+
+www/
+www/index.html
