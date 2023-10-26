@@ -1,0 +1,10 @@
+PidFile=/var/run/zabbix/zabbix_agent2.pid
+LogFile=/var/log/zabbix/zabbix_agent2.log
+LogFileSize=0
+Server=127.0.0.1, {{ hostvars[ 'zabbix_server' ].ansible_default_ipv4.address }}
+ServerActive=127.0.0.1, {{ hostvars[ 'zabbix_server' ].ansible_default_ipv4.address }}
+Hostname=Zabbix server
+Include=/etc/zabbix/zabbix_agent2.d/*.conf
+PluginSocket=/run/zabbix/agent.plugin.sock
+ControlSocket=/run/zabbix/agent.sock
+Include=./zabbix_agent2.d/plugins.d/*.conf

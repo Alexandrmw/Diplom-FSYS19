@@ -1,0 +1,105 @@
+---
+- name: prepare to install ELK
+  hosts: 
+    - elastic_server
+    - kibana_server
+    - web-servers
+  become: yes
+ 
+  roles: 
+    - role: docker_installation
+
+- name: elasticsearch installation
+  hosts: elastic_server
+  become: yes
+  vars_files: ./elasticsearch/vars.yml
+
+  tasks:
+    - name: pull elasticsearch image
+      docker_image:
+        name: "elasticsearch:{{ elk_version }}"
+        source: pull
+
+    - name: run elasticsearch
+      docker_container:
+        name: elasticsearch_node
+        image: "elasticsearch:{{ elk_version }}"
+        state: started
+        published_ports:
+          - 9200:9200
+          - 9300:9300
+        env:
+          discovery.type: single-node
+          network.host: 0.0.0.0
+          xpack.security.enabled: "false"
+
+- name: kibana installation
+  hosts: kibana_server
+  become: yes
+  vars_files: ./elasticsearch/vars.yml
+
+  tasks:
+    - name: pull kibana image
+      docker_image:
+        name: "kibana:{{ elk_version }}"
+        source: pull
+
+    - name: wait for elasticsearch to start
+      wait_for:
+        host: "{{ hostvars[ 'elastic_server' ].ansible_host }}"
+        port: 9200
+
+    - name: run kibana
+      docker_container:
+        name: kibana_node
+        image: "kibana:{{ elk_version }}"
+        state: started
+        published_ports:
+          - 5601:5601
+        env: 
+          ELASTICSEARCH_HOSTS: "http://{{ hostvars[ 'elastic_server' ].ansible_host }}:9200"
+
+- name: filebeat installation
+  hosts: web-servers
+  become: yes
+  vars_files: ./elasticsearch/vars.yml
+
+  tasks:
+    - name: copy filebeat.yml
+      template:
+        src: ./elasticsearch/filebeat.docker.yml.j2
+        dest: /media/filebeat.docker.yml
+      notify: restart filebeat
+
+    - name: pull filebeat image
+      docker_image:
+        name: "elastic/filebeat:{{ elk_version }}"
+        source: pull
+
+    - name: wait for kibana to start
+      wait_for:
+        host: "{{ hostvars[ 'kibana_server' ].ansible_host }}"
+        port: 5601
+
+    - name: run filebeat
+      docker_container:
+        name: "filebeat_{{ inventory_hostname }}"
+        image: "elastic/filebeat:{{ elk_version }}"
+        state: started
+        user: root
+        capabilities:
+          - IPC_LOCK
+        command: 
+          - "--strict.perms=false"
+        volumes:
+          - "/media/filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro"
+          - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+          - "/var/run/docker.sock:/var/run/docker.sock:ro"
+          - "/var/log:/var/log:ro"
+
+  handlers:
+    - name: restart filebeat
+      docker_container:
+        name: "filebeat_{{ inventory_hostname }}"
+        state: started
+        restart: true
