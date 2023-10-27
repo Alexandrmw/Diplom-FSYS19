@@ -11,7 +11,7 @@
   become: yes
   vars_files:
     - "./zabbix/zabbix_dbpasswd.yml"
-
+  
   roles:
     - role: geerlingguy.apache
     - role: geerlingguy.php

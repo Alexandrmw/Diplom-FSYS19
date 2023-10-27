@@ -1,3 +1,4 @@
+#Установка на localhost коллекции плэйбуков
 ---
 - name: install galaxy roles and collection
   hosts: localhost
@@ -18,7 +19,7 @@
     - name: install geerlingguy.php
       community.general.ansible_galaxy_install:
         type: role
-        name: geerlingguy.nginx
+        name: geerlingguy.php
 
     - name: install zabbix
       community.general.ansible_galaxy_install:

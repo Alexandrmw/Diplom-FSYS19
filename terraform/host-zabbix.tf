@@ -27,6 +27,7 @@ resource "yandex_compute_instance" "zabbix-server" {
                            yandex_vpc_security_group.internal-ssh-sg.id,
                            yandex_vpc_security_group.external-ssh-sg.id,
                            yandex_vpc_security_group.zabbix-server-sg.id,
+                           yandex_vpc_security_group.egress-sg.id
                          ]
     
     nat        = true

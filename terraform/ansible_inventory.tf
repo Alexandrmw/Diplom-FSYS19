@@ -15,7 +15,7 @@ resource "local_file" "ansible-inventory" {
     ${yandex_compute_instance.webserver-2.network_interface.0.ip_address} ansible_user=user
 
     [zabbix]
-     ${yandex_compute_instance.zabbix-server.network_interface.0.nat_ip_address} ansible_user=user
+    ${yandex_compute_instance.zabbix-server.network_interface.0.ip_address} public_ip=${yandex_compute_instance.zabbix-server.network_interface.0.nat_ip_address} ansible_user=user
 
     [elasticsearch]
      ${yandex_compute_instance.elasticsearch.network_interface.0.ip_address} ansible_user=user
