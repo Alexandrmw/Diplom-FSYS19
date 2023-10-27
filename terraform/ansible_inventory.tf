@@ -23,13 +23,8 @@ resource "local_file" "ansible-inventory" {
     [kibana]
      ${yandex_compute_instance.kibana.network_interface.0.nat_ip_address} ansible_user=user
 
-
     [all:vars]
     ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -p 22 -W %h:%p -q user@${yandex_compute_instance.bastion-host.network_interface.0.nat_ip_address}"'
-    
-    output "ssh_command" {
-        value = "ssh -J user@${yandex_compute_instance.bastion-host.network_interface.0.nat_ip_address} user@"
-    }
     
     EOT
   filename = "../ansible/hosts.ini"
