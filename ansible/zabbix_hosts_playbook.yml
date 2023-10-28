@@ -70,7 +70,7 @@
             ip: "{{ hostvars[item].ansible_default_ipv4.address }}"
             dns: ""
             port: "10050"
-      loop: "{{ query('inventory_hostnames', 'web-servers') }}"
+      loop: "{{ query('inventory_hostnames', 'web_servers') }}"
 
     - name: add elastic, kibana, bastion to zabbix
       vars:
@@ -99,4 +99,4 @@
             ip: "{{ hostvars[item].ansible_default_ipv4.address }}"
             dns: ""
             port: "10050"
-      loop: "{{ query('inventory_hostnames', 'all:!web-servers:!zabbix') }}"
+      loop: "{{ query('inventory_hostnames', 'all:!web_servers:!zabbix') }}"
