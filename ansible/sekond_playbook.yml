@@ -2,4 +2,4 @@
 - import_playbook: nginx.yml                    # Установка nginx и копирование index.html
 - import_playbook: zabbix_server_playbook.yml   # Установка zabbix на сервера
 - import_playbook: zabbix_hosts_playbook.yml    # Установка агентов zabbix
-- import_playbook: elasticsearch_playbook.yml   # elasticsearch
+- import_playbook: elasticsearch_playbook.yml   # Установка elasticsearch

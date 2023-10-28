@@ -3,7 +3,7 @@
   hosts: 
     - elastic_server
     - kibana_server
-    - web-servers
+    - web_servers
   become: yes
  
   roles: 
@@ -60,7 +60,7 @@
           ELASTICSEARCH_HOSTS: "http://{{ hostvars[ 'elastic_server' ].ansible_host }}:9200"
 
 - name: filebeat installation
-  hosts: web-servers
+  hosts: web_servers
   become: yes
   vars_files: ./elasticsearch/vars.yml
 
