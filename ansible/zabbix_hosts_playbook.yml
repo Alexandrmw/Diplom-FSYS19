@@ -12,7 +12,6 @@
   gather_facts: yes
   tasks:    
     - include_vars: "./zabbix/zabbix_credentials.yml"
-
     - name: add zabbix_server to zabbix
       vars:
         ansible_network_os: community.zabbix.zabbix
