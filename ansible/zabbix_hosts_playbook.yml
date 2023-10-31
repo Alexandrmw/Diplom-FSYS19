@@ -2,14 +2,14 @@
 - name: install zabbix-agent2
   hosts: all
   become: yes
-
+  gather_facts: yes
   roles: 
     - role: zabbix_agent2
 
 - name: connect zabbix-agent2 to zabbix-server
   hosts: zabbix
   become: yes
-
+  gather_facts: yes
   tasks:    
     - include_vars: "./zabbix/zabbix_credentials.yml"
 
