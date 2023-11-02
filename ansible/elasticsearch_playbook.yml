@@ -5,13 +5,15 @@
     - kibana_server
     - web_servers
   become: yes
- 
+  gather_facts: yes
+
   roles: 
     - role: docker_installation
 
 - name: elasticsearch installation
   hosts: elastic_server
   become: yes
+  gather_facts: yes
   vars_files: ./elasticsearch/vars.yml
 
   tasks:
@@ -36,6 +38,7 @@
 - name: kibana installation
   hosts: kibana_server
   become: yes
+  gather_facts: yes
   vars_files: ./elasticsearch/vars.yml
 
   tasks:
@@ -46,7 +49,7 @@
 
     - name: wait for elasticsearch to start
       wait_for:
-        host: "{{ hostvars[ 'elastic_server' ].ansible_host }}"
+        host: "192.168.10.30"
         port: 9200
 
     - name: run kibana
@@ -57,11 +60,12 @@
         published_ports:
           - 5601:5601
         env: 
-          ELASTICSEARCH_HOSTS: "http://{{ hostvars[ 'elastic_server' ].ansible_host }}:9200"
+          ELASTICSEARCH_HOSTS: "http://192.168.10.30:9200"
 
 - name: filebeat installation
   hosts: web_servers
   become: yes
+  gather_facts: yes
   vars_files: ./elasticsearch/vars.yml
 
   tasks:

@@ -1,7 +1,7 @@
 # Бастион хост
-resource "yandex_compute_instance" "bastion-host" {
+resource "yandex_compute_instance" "bastion" {
 
-  name     = "bastion-host"
+  name     = "bastion"
   hostname = "bastion"
   zone     = "ru-central1-a"
   allow_stopping_for_update = true

@@ -1,4 +1,3 @@
-/*
 resource "yandex_compute_snapshot_schedule" "snapshot" {
   name = "snapshot"
 
@@ -16,12 +15,9 @@ resource "yandex_compute_snapshot_schedule" "snapshot" {
 
   disk_ids = [
     "${yandex_compute_instance.bastion.boot_disk.0.disk_id}",
-    "${yandex_compute_instance.web-1.boot_disk.0.disk_id}",
-    "${yandex_compute_instance.web-2.boot_disk.0.disk_id}",
-    "${yandex_compute_instance.zabbix.boot_disk.0.disk_id}",
+    "${yandex_compute_instance.webserver-1.boot_disk.0.disk_id}",
+    "${yandex_compute_instance.webserver-1.boot_disk.0.disk_id}",
+    "${yandex_compute_instance.zabbix-server.boot_disk.0.disk_id}",
     "${yandex_compute_instance.elasticsearch.boot_disk.0.disk_id}",
     "${yandex_compute_instance.kibana.boot_disk.0.disk_id}", ]
 }
-
-
-*/

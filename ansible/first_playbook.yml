@@ -1,4 +1,4 @@
-#Установка на localhost коллекции плэйбуков
+#Установка на Управляющий localhost коллекции плэйбуков
 ---
 - name: install galaxy roles and collection
   hosts: localhost
