@@ -24,12 +24,13 @@ resource "local_file" "ansible-inventory" {
     ${yandex_compute_instance.elasticsearch.network_interface.0.ip_address} public_ip=${yandex_compute_instance.elasticsearch.network_interface.0.nat_ip_address} ansible_user=user
 
     [kibana_server]
-    ${yandex_compute_instance.kibana.network_interface.0.nat_ip_address} ansible_user=user
+    ${yandex_compute_instance.kibana.network_interface.0.ip_address} public_ip=${yandex_compute_instance.kibana.network_interface.0.nat_ip_address} ansible_user=user
 
     [all:vars]
     ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand="ssh -p 22 -W %h:%p -q user@${yandex_compute_instance.bastion.network_interface.0.nat_ip_address}"'
     zabbix_ext_ip=${yandex_compute_instance.zabbix-server.network_interface.0.nat_ip_address}
     zabbix_int_ip=${yandex_compute_instance.zabbix-server.network_interface.0.ip_address}
+    alb_ip=${yandex_alb_load_balancer.alb-lb.listener.0.endpoint.0.address.0.external_ipv4_address.0.address}
 
     EOT
   filename = "../ansible/hosts.ini"
