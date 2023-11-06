@@ -6,7 +6,7 @@ main.tf
 .terraform/*
 .terraform/
 
-
+#terraform служебные
 *terraform.tfstate.backup
 terraform.tfstate.backup
 *.terraform.lock.hcl
@@ -16,13 +16,16 @@ terraform.tfstate
 *terraform.tfstate.backup
 terraform.tfstate.backup
 
+#site
 www/
 www/index.html
+
 
 **/ansible.log
 
 **/id_rsa
 **/id_rsa.pub
 
-
 arhiv
+
+**/check_hostvars.yml
