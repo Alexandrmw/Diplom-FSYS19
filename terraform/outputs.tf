@@ -39,6 +39,9 @@ output "zabbix" {
 }
 
 # elasticsearch-сервер
+output "elasticsearch_nat" {
+  value = yandex_compute_instance.elasticsearch.network_interface.0.nat_ip_address
+}
 output "elasticsearch" {
   value = yandex_compute_instance.elasticsearch.network_interface.0.ip_address
 }

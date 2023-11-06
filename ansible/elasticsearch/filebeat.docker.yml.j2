@@ -8,7 +8,7 @@ filebeat.modules:
 setup.dashboards.enabled: true
 
 output.elasticsearch:
-  hosts: ["http://{{ hostvars[ 'elastic_server' ].ansible_host }}:9200"]
+  hosts: ["http://{{ groups[ 'elastic_server' ][0] }}:9200"]
 
 setup.kibana:
-  host: "http://{{ hostvars[ 'kibana_server' ].ansible_host }}:5601"
+  host: "http://{{ groups[ 'kibana_server' ][0] }}:5601"
