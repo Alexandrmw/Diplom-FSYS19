@@ -1,5 +1,5 @@
 ---
-- name: prepare to install ELK # Установка докера на web_servers / elastic_server / kibana_server
+- name: prepare to install ELK. Docker installation # Установка докера на web_servers / elastic_server / kibana_server
   hosts: 
     - elastic_server
     - kibana_server
@@ -32,7 +32,7 @@
         env:
           discovery.type: single-node
           network.host: 0.0.0.0
-          xpack.security.enabled: "false"
+          xpack.security.enabled: false
 
 - name: kibana installation # Установка kibana на kibana_server
   hosts: kibana_server
