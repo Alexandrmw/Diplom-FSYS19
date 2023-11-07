@@ -30,7 +30,7 @@ resource "yandex_compute_instance" "elasticsearch" {
                            yandex_vpc_security_group.elastic-sg.id,
                            yandex_vpc_security_group.egress-sg.id
                          ]
-    nat       = true   
+    nat       = false   
     ip_address = "192.168.10.30"
   }
 

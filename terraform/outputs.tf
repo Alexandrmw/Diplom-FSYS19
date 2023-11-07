@@ -1,9 +1,7 @@
-# Bastion-host - nat
+# Bastion-host
 output "bastion_nat" {
   value = yandex_compute_instance.bastion.network_interface.0.nat_ip_address
 }
-
-# Bastion-host
 output "bastion" {
   value = yandex_compute_instance.bastion.network_interface.0.ip_address
 }
@@ -18,30 +16,23 @@ output "webserver-2" {
   value = yandex_compute_instance.webserver-2.network_interface.0.ip_address
 }
 
-# kibana-сервер - nat
+# kibana-сервер 
 output "kibana-nat" {
   value = yandex_compute_instance.kibana.network_interface.0.nat_ip_address
 }
-
-# kibana-сервер
 output "kibana" {
   value = yandex_compute_instance.kibana.network_interface.0.ip_address
 }
 
-# zabbix-сервер - nat
+# zabbix-сервер
 output "zabbix_nat" {
   value = yandex_compute_instance.zabbix-server.network_interface.0.nat_ip_address
 }
-
-# zabbix-сервер
 output "zabbix" {
   value = yandex_compute_instance.zabbix-server.network_interface.0.ip_address
 }
 
 # elasticsearch-сервер
-output "elasticsearch_nat" {
-  value = yandex_compute_instance.elasticsearch.network_interface.0.nat_ip_address
-}
 output "elasticsearch" {
   value = yandex_compute_instance.elasticsearch.network_interface.0.ip_address
 }
