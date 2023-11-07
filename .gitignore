@@ -29,3 +29,8 @@ www/index.html
 arhiv
 
 **/check_hostvars.yml
+
+distribute
+
+.vscode/**
+**/.vscode
