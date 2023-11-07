@@ -1,5 +1,5 @@
 ---
-- name: prepare to install ELK
+- name: prepare to install ELK # Установка докера на web_servers / elastic_server / kibana_server
   hosts: 
     - elastic_server
     - kibana_server
@@ -9,19 +9,19 @@
   roles: 
     - role: docker_installation
 
-- name: elasticsearch installation
+- name: elasticsearch installation # Установка elasticsearch на elastic_server
   hosts: elastic_server
   become: yes
 
   vars_files: ./elasticsearch/vars.yml
 
   tasks:
-    - name: pull elasticsearch image
+    - name: pull elasticsearch image # Скачивание elasticsearch docker image
       docker_image:
         name: "elasticsearch:{{ elk_version }}"
         source: pull
 
-    - name: run elasticsearch
+    - name: run elasticsearch # Запуск elasticsearch и настройка контейнера
       docker_container:
         name: elasticsearch_node
         image: "elasticsearch:{{ elk_version }}"
@@ -34,24 +34,24 @@
           network.host: 0.0.0.0
           xpack.security.enabled: "false"
 
-- name: kibana installation
+- name: kibana installation # Установка kibana на kibana_server
   hosts: kibana_server
   become: yes
 
   vars_files: ./elasticsearch/vars.yml
 
   tasks:
-    - name: pull kibana image
+    - name: pull kibana image # Скачивание kibana docker image
       docker_image:
         name: "kibana:{{ elk_version }}"
         source: pull
 
-    - name: wait for elasticsearch to start
+    - name: wait for elasticsearch to start # Ожидание запуска elastic_server
       wait_for:
         host: "{{ groups['elastic_server'][0] }}"
         port: 9200
 
-    - name: run kibana
+    - name: run kibana # Запуск kibana и настройка контейнера
       docker_container:
         name: kibana_node
         image: "kibana:{{ elk_version }}"
@@ -59,32 +59,32 @@
         published_ports:
           - 5601:5601
         env: 
-          elasticsearch.hosts: "http://{{ groups['elastic_server'][0] }}:9200"
+          ELASTICSEARCH_HOSTS: "http://{{ groups['elastic_server'][0] }}:9200"
 
-- name: filebeat installation
+- name: filebeat installation # Установка filebeat на web_servers
   hosts: web_servers
   become: yes
 
   vars_files: ./elasticsearch/vars.yml
 
   tasks:
-    - name: copy filebeat.yml
+    - name: copy filebeat.yml # Копирование файла настроек filebeat
       template:
         src: ./elasticsearch/filebeat.docker.yml.j2
         dest: /media/filebeat.docker.yml
       notify: restart filebeat
 
-    - name: pull filebeat image
+    - name: pull filebeat image # Скачивание filebeat docker image
       docker_image:
         name: "elastic/filebeat:{{ elk_version }}"
         source: pull
 
-    - name: wait for kibana to start
+    - name: wait for kibana to start # Ожидание запуска kibana_server
       wait_for:
-        host: "{{ groups[ 'kibana_server' ][0] }}"
+        host: "{{ groups['kibana_server'][0] }}"
         port: 5601
 
-    - name: run filebeat
+    - name: run filebeat # Запуск filebeat и настройка контейнера
       docker_container:
         name: "filebeat_{{ inventory_hostname }}"
         image: "elastic/filebeat:{{ elk_version }}"
