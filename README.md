@@ -104,7 +104,7 @@
 
 И будет собираться телеметрия  
   
-<img src = "img/004_02.png" width = 100%>  
+<img src = "img/004_02.png" width = 100%>   
 
 ## Развернётся Elasticsearch и Kibana. Filebeat с rkfcnthf вэбсерверов отправляет метрику
 
