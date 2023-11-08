@@ -29,5 +29,9 @@ arhiv
 distribute
 
 .vscode/**
-**/.vscode
+.vscode
+
+.vscode/settings.json
+**/settings.json
+*settings.json
 
