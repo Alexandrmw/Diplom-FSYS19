@@ -29,3 +29,4 @@ distribute
 
 .vscode/**
 **/.vscode
+terraform/main.tf
