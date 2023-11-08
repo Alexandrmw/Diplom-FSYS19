@@ -1,6 +1,5 @@
 #main
-main.tf
-**/main.tf
+
 
 #terraform
 .terraform/*
@@ -15,11 +14,6 @@ terraform.tfstate.backup
 terraform.tfstate
 *terraform.tfstate.backup
 terraform.tfstate.backup
-
-#site
-www/
-www/index.html
-
 
 **/ansible.log
 
