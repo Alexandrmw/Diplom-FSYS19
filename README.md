@@ -3,7 +3,7 @@
 ## Задача
 Ключевая задача — разработать отказоустойчивую инфраструктуру для сайта, включающую мониторинг, сбор логов и резервное копирование основных данных. Инфраструктура должна размещаться в [Yandex Cloud](https://cloud.yandex.com/) и отвечать минимальным стандартам безопасности: запрещается выкладывать токен от облака в git. Используйте [инструкцию](https://cloud.yandex.ru/docs/tutorials/infrastructure-management/terraform-quickstart#get-credentials).  
 
-Полное задание к дипломной работе см.:[Задание](https://github.com/netology-code/sys-diplom/blob/diplom-zabbix/README.md)  
+[Полное задание к дипломной работе:](https://github.com/netology-code/sys-diplom/blob/diplom-zabbix/README.md)  
 
   
 ## Доступ к сайту http://158.160.131.165/  
