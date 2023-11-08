@@ -1,6 +1,7 @@
 #main
 main.tf
 **/main.tf
+terraform/main.tf
 
 #terraform
 .terraform/*
@@ -29,4 +30,4 @@ distribute
 
 .vscode/**
 **/.vscode
-terraform/main.tf
+
