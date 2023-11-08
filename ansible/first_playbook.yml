@@ -31,7 +31,7 @@
         type: collection
         name: community.postgresql
 
-    - name: install docker collection
-      community.general.ansible_galaxy_install:
-        type: collection
-        name: community.docker
+    # - name: install docker collection
+    #   community.general.ansible_galaxy_install:
+    #     type: collection
+    #     name: community.docker
