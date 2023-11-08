@@ -1,5 +1,6 @@
 #main
-
+main.tf
+**/main.tf
 
 #terraform
 .terraform/*
