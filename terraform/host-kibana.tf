@@ -38,8 +38,8 @@ resource "yandex_compute_instance" "kibana" {
     user-data = "${file("./meta.yaml")}"
   }
 
-  scheduling_policy {
-    preemptible = true
-  }
+  # scheduling_policy {
+  #   preemptible = true
+  # }
 
 }
