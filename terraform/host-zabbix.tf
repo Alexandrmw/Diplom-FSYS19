@@ -38,9 +38,9 @@ resource "yandex_compute_instance" "zabbix-server" {
     user-data = "${file("./meta.yaml")}"
   }
 
-  # scheduling_policy {
-  #   preemptible = true
-  # }
+  scheduling_policy {
+    preemptible = false
+  }
 
 }
 

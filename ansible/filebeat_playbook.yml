@@ -46,7 +46,7 @@
         state: restarted
 
     - name: Restarted filebeat # Перезагрузить сервис filebeat
-      systemd:
+      service:
         name: filebeat.service
         state: restarted
 

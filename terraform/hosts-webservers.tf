@@ -44,9 +44,9 @@ resource "yandex_compute_instance" "webserver-1" {
     user-data = "${file("./meta.yaml")}"
   }
 
-  # scheduling_policy {
-  #   preemptible = true
-  # }
+  scheduling_policy {
+    preemptible = false
+  }
 
 }
 
@@ -96,7 +96,7 @@ resource "yandex_compute_instance" "webserver-2" {
     user-data = "${file("./meta.yaml")}"
   }
 
-  #   scheduling_policy {
-  #   preemptible = true
-  # }
+    scheduling_policy {
+    preemptible = false
+  }
 }
